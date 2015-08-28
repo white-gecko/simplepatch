@@ -92,14 +92,14 @@ def main (args=sys.argv):
         inf = open(inFile, 'r')
         outf = open(outFile, 'r')
         if (patchFile == None):
-            patchFile = sys.stdout
+            patchf = sys.stdout
         else:
             patchf = open(patchFile, 'w')
-            diffMethod(inf, outf, patchf)
+        diffMethod(inf, outf, patchf)
 
-            inf.close()
-            outf.close()
-            patchf.close()
+        inf.close()
+        outf.close()
+        patchf.close()
 
 
 def usage ():
