@@ -26,6 +26,9 @@ def patchMethod (inFile, outFile, patchFile):
         else:
             print("Error no valid patch file")
             sys.exit(1)
+    while (inl):
+        outFile.write(inl)
+        inl = inFile.readline()
 
 def diffMethod (inFile, outFile, patchFile):
     inl = inFile.readline()
