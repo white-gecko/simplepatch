@@ -22,7 +22,7 @@ def patchMethod (inFile, outFile, patchFile):
                 inl = inFile.readline()
         else:
             print("Error no valid patch file")
-            exit(2)
+            sys.exit(1)
 
 def diffMethod (inFile, outFile, patchFile):
     inl = inFile.readline()
@@ -72,7 +72,12 @@ def main (args=sys.argv):
             assert False, "unhandled option"
 
     if (prog == "spatch"):
+        if (not inFile):
+            print("Error: in file has to be specified")
+            usage()
+            sys.exit(1)
         inf = open(inFile, 'r')
+
         if (outFile == None):
             outf = sys.stdout
         else:
@@ -82,6 +87,7 @@ def main (args=sys.argv):
             patchf = sys.stdin
         else:
             patchf = open(patchFile, 'r')
+
         patchMethod(inf, outf, patchf)
 
         outf.close()
@@ -89,12 +95,19 @@ def main (args=sys.argv):
         inf.close()
 
     elif (prog == "sdiff"):
+        if (not inFile or not outFile):
+            print("Error: In and out file has to be specified")
+            usage()
+            sys.exit(1)
+
         inf = open(inFile, 'r')
         outf = open(outFile, 'r')
+
         if (patchFile == None):
             patchf = sys.stdout
         else:
             patchf = open(patchFile, 'w')
+
         diffMethod(inf, outf, patchf)
 
         inf.close()
