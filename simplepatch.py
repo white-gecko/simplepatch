@@ -11,6 +11,9 @@ def patchMethod (inFile, outFile, patchFile):
                 if (inl == patch[2:]):
                     inl = inFile.readline()
                     break
+                if (inl > patch[2:]):
+                    print("Skip removing '" + patch[2:].rstrip("\n") + "', could not be found")
+                    break
                 outFile.write(inl)
                 inl = inFile.readline()
         elif (patch[0] == '+'):
